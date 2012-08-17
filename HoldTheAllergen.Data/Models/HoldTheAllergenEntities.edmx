@@ -1,0 +1,707 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HoldTheAllergenModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="HoldTheAllergenModelStoreContainer">
+          <EntitySet Name="Allergens" EntityType="HoldTheAllergenModel.Store.Allergens" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="MenuItemIngredients" EntityType="HoldTheAllergenModel.Store.MenuItemIngredients" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="MenuItems" EntityType="HoldTheAllergenModel.Store.MenuItems" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="RestaurantCategories" EntityType="HoldTheAllergenModel.Store.RestaurantCategories" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="RestaurantIngredientAllergens" EntityType="HoldTheAllergenModel.Store.RestaurantIngredientAllergens" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="RestaurantIngredients" EntityType="HoldTheAllergenModel.Store.RestaurantIngredients" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="RestaurantLocations" EntityType="HoldTheAllergenModel.Store.RestaurantLocations" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Restaurants" EntityType="HoldTheAllergenModel.Store.Restaurants" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="UserAllergies" EntityType="HoldTheAllergenModel.Store.UserAllergies" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Users" EntityType="HoldTheAllergenModel.Store.Users" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="UserStarredMenuItems" EntityType="HoldTheAllergenModel.Store.UserStarredMenuItems" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <AssociationSet Name="FK_IngredientAllergens_Allergens" Association="HoldTheAllergenModel.Store.FK_IngredientAllergens_Allergens">
+            <End Role="Allergens" EntitySet="Allergens" />
+            <End Role="RestaurantIngredientAllergens" EntitySet="RestaurantIngredientAllergens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IngredientAllergens_Ingredients" Association="HoldTheAllergenModel.Store.FK_IngredientAllergens_Ingredients">
+            <End Role="RestaurantIngredients" EntitySet="RestaurantIngredients" />
+            <End Role="RestaurantIngredientAllergens" EntitySet="RestaurantIngredientAllergens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItemIngredients_Ingredients" Association="HoldTheAllergenModel.Store.FK_MenuItemIngredients_Ingredients">
+            <End Role="RestaurantIngredients" EntitySet="RestaurantIngredients" />
+            <End Role="MenuItemIngredients" EntitySet="MenuItemIngredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItemIngredients_MenuItems" Association="HoldTheAllergenModel.Store.FK_MenuItemIngredients_MenuItems">
+            <End Role="MenuItems" EntitySet="MenuItems" />
+            <End Role="MenuItemIngredients" EntitySet="MenuItemIngredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItems_Restaurant" Association="HoldTheAllergenModel.Store.FK_MenuItems_Restaurant">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="MenuItems" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RestaurantIngredients_Restaurant" Association="HoldTheAllergenModel.Store.FK_RestaurantIngredients_Restaurant">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="RestaurantIngredients" EntitySet="RestaurantIngredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RestaurantLocations_Restaurants" Association="HoldTheAllergenModel.Store.FK_RestaurantLocations_Restaurants">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="RestaurantLocations" EntitySet="RestaurantLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurants_RestaurantCategories" Association="HoldTheAllergenModel.Store.FK_Restaurants_RestaurantCategories">
+            <End Role="RestaurantCategories" EntitySet="RestaurantCategories" />
+            <End Role="Restaurants" EntitySet="Restaurants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAllergies_Allergens" Association="HoldTheAllergenModel.Store.FK_UserAllergies_Allergens">
+            <End Role="Allergens" EntitySet="Allergens" />
+            <End Role="UserAllergies" EntitySet="UserAllergies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAllergies_Users" Association="HoldTheAllergenModel.Store.FK_UserAllergies_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserAllergies" EntitySet="UserAllergies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserStarredMenuItems_Users" Association="HoldTheAllergenModel.Store.FK_UserStarredMenuItems_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserStarredMenuItems" EntitySet="UserStarredMenuItems" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Allergens">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="1000" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MenuItemIngredients">
+          <Key>
+            <PropertyRef Name="MenuItemId" />
+            <PropertyRef Name="RestaurantIngredientId" />
+          </Key>
+          <Property Name="MenuItemId" Type="int" Nullable="false" />
+          <Property Name="RestaurantIngredientId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RestaurantId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UrlSlug" Type="nvarchar" MaxLength="150" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RestaurantCategories">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="75" />
+          <Property Name="Icon" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RestaurantIngredientAllergens">
+          <Key>
+            <PropertyRef Name="AllergenId" />
+            <PropertyRef Name="RestaurantIngredientId" />
+          </Key>
+          <Property Name="AllergenId" Type="int" Nullable="false" />
+          <Property Name="RestaurantIngredientId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RestaurantIngredients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RestaurantId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1500" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RestaurantLocations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RestaurantId" Type="int" Nullable="false" />
+          <Property Name="Lat" Type="float" Nullable="false" />
+          <Property Name="Lng" Type="float" Nullable="false" />
+          <Property Name="StreetNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="StreetName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProvinceCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="CountryCode" Type="nvarchar" MaxLength="3" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="15" />
+          <Property Name="PhoneNumber" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" />
+          <Property Name="Source" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Restaurants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="nvarchar" Nullable="false" MaxLength="75" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="75" />
+          <Property Name="Logo" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
+          <Property Name="UrlSlug" Type="nvarchar" Nullable="false" MaxLength="75" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserAllergies">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="AllergenId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AllergenId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastActivity" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserStarredMenuItems">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="MenuItemId" />
+            <PropertyRef Name="RestaurantId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MenuItemId" Type="int" Nullable="false" />
+          <Property Name="RestaurantId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_IngredientAllergens_Allergens">
+          <End Role="Allergens" Type="HoldTheAllergenModel.Store.Allergens" Multiplicity="1" />
+          <End Role="RestaurantIngredientAllergens" Type="HoldTheAllergenModel.Store.RestaurantIngredientAllergens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Allergens">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RestaurantIngredientAllergens">
+              <PropertyRef Name="AllergenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IngredientAllergens_Ingredients">
+          <End Role="RestaurantIngredients" Type="HoldTheAllergenModel.Store.RestaurantIngredients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RestaurantIngredientAllergens" Type="HoldTheAllergenModel.Store.RestaurantIngredientAllergens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RestaurantIngredients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RestaurantIngredientAllergens">
+              <PropertyRef Name="RestaurantIngredientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItemIngredients_Ingredients">
+          <End Role="RestaurantIngredients" Type="HoldTheAllergenModel.Store.RestaurantIngredients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MenuItemIngredients" Type="HoldTheAllergenModel.Store.MenuItemIngredients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RestaurantIngredients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItemIngredients">
+              <PropertyRef Name="RestaurantIngredientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItemIngredients_MenuItems">
+          <End Role="MenuItems" Type="HoldTheAllergenModel.Store.MenuItems" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MenuItemIngredients" Type="HoldTheAllergenModel.Store.MenuItemIngredients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItemIngredients">
+              <PropertyRef Name="MenuItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItems_Restaurant">
+          <End Role="Restaurants" Type="HoldTheAllergenModel.Store.Restaurants" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MenuItems" Type="HoldTheAllergenModel.Store.MenuItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItems">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RestaurantIngredients_Restaurant">
+          <End Role="Restaurants" Type="HoldTheAllergenModel.Store.Restaurants" Multiplicity="1" />
+          <End Role="RestaurantIngredients" Type="HoldTheAllergenModel.Store.RestaurantIngredients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RestaurantIngredients">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RestaurantLocations_Restaurants">
+          <End Role="Restaurants" Type="HoldTheAllergenModel.Store.Restaurants" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RestaurantLocations" Type="HoldTheAllergenModel.Store.RestaurantLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RestaurantLocations">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Restaurants_RestaurantCategories">
+          <End Role="RestaurantCategories" Type="HoldTheAllergenModel.Store.RestaurantCategories" Multiplicity="1" />
+          <End Role="Restaurants" Type="HoldTheAllergenModel.Store.Restaurants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RestaurantCategories">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Restaurants">
+              <PropertyRef Name="CategoryName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAllergies_Allergens">
+          <End Role="Allergens" Type="HoldTheAllergenModel.Store.Allergens" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserAllergies" Type="HoldTheAllergenModel.Store.UserAllergies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Allergens">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAllergies">
+              <PropertyRef Name="AllergenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAllergies_Users">
+          <End Role="Users" Type="HoldTheAllergenModel.Store.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserAllergies" Type="HoldTheAllergenModel.Store.UserAllergies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAllergies">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserStarredMenuItems_Users">
+          <End Role="Users" Type="HoldTheAllergenModel.Store.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserStarredMenuItems" Type="HoldTheAllergenModel.Store.UserStarredMenuItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserStarredMenuItems">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HoldTheAllergenModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="HoldTheAllergenEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Allergens" EntityType="HoldTheAllergenModel.Allergen" />
+          <EntitySet Name="MenuItems" EntityType="HoldTheAllergenModel.MenuItem" />
+          <EntitySet Name="RestaurantCategories" EntityType="HoldTheAllergenModel.RestaurantCategory" />
+          <EntitySet Name="RestaurantIngredients" EntityType="HoldTheAllergenModel.RestaurantIngredient" />
+          <EntitySet Name="RestaurantLocations" EntityType="HoldTheAllergenModel.RestaurantLocation" />
+          <EntitySet Name="Restaurants" EntityType="HoldTheAllergenModel.Restaurant" />
+          <AssociationSet Name="FK_MenuItems_Restaurant" Association="HoldTheAllergenModel.FK_MenuItems_Restaurant">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="MenuItems" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurants_RestaurantCategories" Association="HoldTheAllergenModel.FK_Restaurants_RestaurantCategories">
+            <End Role="RestaurantCategories" EntitySet="RestaurantCategories" />
+            <End Role="Restaurants" EntitySet="Restaurants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RestaurantIngredients_Restaurant" Association="HoldTheAllergenModel.FK_RestaurantIngredients_Restaurant">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="RestaurantIngredients" EntitySet="RestaurantIngredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RestaurantLocations_Restaurants" Association="HoldTheAllergenModel.FK_RestaurantLocations_Restaurants">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="RestaurantLocations" EntitySet="RestaurantLocations" />
+          </AssociationSet>
+          <AssociationSet Name="MenuItemIngredients" Association="HoldTheAllergenModel.MenuItemIngredients">
+            <End Role="RestaurantIngredients" EntitySet="RestaurantIngredients" />
+            <End Role="MenuItems" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="RestaurantIngredientAllergens" Association="HoldTheAllergenModel.RestaurantIngredientAllergens">
+            <End Role="Allergens" EntitySet="Allergens" />
+            <End Role="RestaurantIngredients" EntitySet="RestaurantIngredients" />
+          </AssociationSet>
+          <EntitySet Name="UserStarredMenuItems" EntityType="HoldTheAllergenModel.UserStarredMenuItem" />
+          <EntitySet Name="Users" EntityType="HoldTheAllergenModel.User" />
+          <AssociationSet Name="FK_UserStarredMenuItems_Users" Association="HoldTheAllergenModel.FK_UserStarredMenuItems_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserStarredMenuItem" EntitySet="UserStarredMenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="UserAllergies" Association="HoldTheAllergenModel.UserAllergies">
+            <End Role="Allergen" EntitySet="Allergens" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Allergen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="1000" Unicode="false" FixedLength="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Ingredients" Relationship="HoldTheAllergenModel.RestaurantIngredientAllergens" FromRole="Allergens" ToRole="RestaurantIngredients" />
+          <NavigationProperty Name="Users" Relationship="HoldTheAllergenModel.UserAllergies" FromRole="Allergen" ToRole="User" />
+        </EntityType>
+        <EntityType Name="MenuItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RestaurantId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="GroupName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="UrlSlug" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Restaurant" Relationship="HoldTheAllergenModel.FK_MenuItems_Restaurant" FromRole="MenuItems" ToRole="Restaurants" />
+          <NavigationProperty Name="Ingredients" Relationship="HoldTheAllergenModel.MenuItemIngredients" FromRole="MenuItems" ToRole="RestaurantIngredients" />
+        </EntityType>
+        <EntityType Name="RestaurantCategory">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="75" Unicode="true" FixedLength="false" />
+          <Property Name="Icon" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Restaurants" Relationship="HoldTheAllergenModel.FK_Restaurants_RestaurantCategories" FromRole="RestaurantCategories" ToRole="Restaurants" />
+        </EntityType>
+        <EntityType Name="RestaurantIngredient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RestaurantId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="1500" Unicode="true" FixedLength="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Restaurant" Relationship="HoldTheAllergenModel.FK_RestaurantIngredients_Restaurant" FromRole="RestaurantIngredients" ToRole="Restaurants" />
+          <NavigationProperty Name="MenuItems" Relationship="HoldTheAllergenModel.MenuItemIngredients" FromRole="RestaurantIngredients" ToRole="MenuItems" />
+          <NavigationProperty Name="Allergens" Relationship="HoldTheAllergenModel.RestaurantIngredientAllergens" FromRole="RestaurantIngredients" ToRole="Allergens" />
+        </EntityType>
+        <EntityType Name="RestaurantLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RestaurantId" Type="Int32" Nullable="false" />
+          <Property Name="Lat" Type="Double" Nullable="false" />
+          <Property Name="Lng" Type="Double" Nullable="false" />
+          <Property Name="StreetNumber" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="StreetName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="CityName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="ProvinceCode" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="CountryCode" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="3" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Restaurant" Relationship="HoldTheAllergenModel.FK_RestaurantLocations_Restaurants" FromRole="RestaurantLocations" ToRole="Restaurants" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="75" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="75" Unicode="true" FixedLength="false" />
+          <Property Name="Logo" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Notes" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="UrlSlug" Type="String" Nullable="false" MaxLength="75" Unicode="true" FixedLength="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MenuItems" Relationship="HoldTheAllergenModel.FK_MenuItems_Restaurant" FromRole="Restaurants" ToRole="MenuItems" />
+          <NavigationProperty Name="Category" Relationship="HoldTheAllergenModel.FK_Restaurants_RestaurantCategories" FromRole="Restaurants" ToRole="RestaurantCategories" />
+          <NavigationProperty Name="Ingredients" Relationship="HoldTheAllergenModel.FK_RestaurantIngredients_Restaurant" FromRole="Restaurants" ToRole="RestaurantIngredients" />
+          <NavigationProperty Name="Locations" Relationship="HoldTheAllergenModel.FK_RestaurantLocations_Restaurants" FromRole="Restaurants" ToRole="RestaurantLocations" />
+        </EntityType>
+        <Association Name="FK_MenuItems_Restaurant">
+          <End Role="Restaurants" Type="HoldTheAllergenModel.Restaurant" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MenuItems" Type="HoldTheAllergenModel.MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItems">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Restaurants_RestaurantCategories">
+          <End Role="RestaurantCategories" Type="HoldTheAllergenModel.RestaurantCategory" Multiplicity="1" />
+          <End Role="Restaurants" Type="HoldTheAllergenModel.Restaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RestaurantCategories">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Restaurants">
+              <PropertyRef Name="CategoryName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RestaurantIngredients_Restaurant">
+          <End Role="Restaurants" Type="HoldTheAllergenModel.Restaurant" Multiplicity="1" />
+          <End Role="RestaurantIngredients" Type="HoldTheAllergenModel.RestaurantIngredient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RestaurantIngredients">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RestaurantLocations_Restaurants">
+          <End Role="Restaurants" Type="HoldTheAllergenModel.Restaurant" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RestaurantLocations" Type="HoldTheAllergenModel.RestaurantLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RestaurantLocations">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MenuItemIngredients">
+          <End Role="RestaurantIngredients" Type="HoldTheAllergenModel.RestaurantIngredient" Multiplicity="*" />
+          <End Role="MenuItems" Type="HoldTheAllergenModel.MenuItem" Multiplicity="*" />
+        </Association>
+        <Association Name="RestaurantIngredientAllergens">
+          <End Role="Allergens" Type="HoldTheAllergenModel.Allergen" Multiplicity="*" />
+          <End Role="RestaurantIngredients" Type="HoldTheAllergenModel.RestaurantIngredient" Multiplicity="*" />
+        </Association>
+        <EntityType Name="UserStarredMenuItem">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="MenuItemId" />
+            <PropertyRef Name="RestaurantId" />
+          </Key>
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="MenuItemId" Nullable="false" />
+          <Property Type="Int32" Name="RestaurantId" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="HoldTheAllergenModel.FK_UserStarredMenuItems_Users" FromRole="UserStarredMenuItem" ToRole="User" />
+          </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="StarredMenuItems" Relationship="HoldTheAllergenModel.FK_UserStarredMenuItems_Users" FromRole="User" ToRole="UserStarredMenuItem" />
+          <NavigationProperty Name="Allergies" Relationship="HoldTheAllergenModel.UserAllergies" FromRole="User" ToRole="Allergen" />
+          <Property Type="DateTime" Name="LastActivity" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_UserStarredMenuItems_Users">
+          <End Type="HoldTheAllergenModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HoldTheAllergenModel.UserStarredMenuItem" Role="UserStarredMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserStarredMenuItem">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserAllergies">
+          <End Type="HoldTheAllergenModel.Allergen" Role="Allergen" Multiplicity="*" />
+          <End Type="HoldTheAllergenModel.User" Role="User" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HoldTheAllergenModelStoreContainer" CdmEntityContainer="HoldTheAllergenEntities">
+          <EntitySetMapping Name="Allergens">
+            <EntityTypeMapping TypeName="HoldTheAllergenModel.Allergen">
+              <MappingFragment StoreEntitySet="Allergens">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuItems">
+            <EntityTypeMapping TypeName="HoldTheAllergenModel.MenuItem">
+              <MappingFragment StoreEntitySet="MenuItems">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="UrlSlug" ColumnName="UrlSlug" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RestaurantCategories">
+            <EntityTypeMapping TypeName="HoldTheAllergenModel.RestaurantCategory">
+              <MappingFragment StoreEntitySet="RestaurantCategories">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RestaurantIngredients">
+            <EntityTypeMapping TypeName="HoldTheAllergenModel.RestaurantIngredient">
+              <MappingFragment StoreEntitySet="RestaurantIngredients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RestaurantLocations">
+            <EntityTypeMapping TypeName="HoldTheAllergenModel.RestaurantLocation">
+              <MappingFragment StoreEntitySet="RestaurantLocations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="StreetNumber" ColumnName="StreetNumber" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="ProvinceCode" ColumnName="ProvinceCode" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurants">
+            <EntityTypeMapping TypeName="HoldTheAllergenModel.Restaurant">
+              <MappingFragment StoreEntitySet="Restaurants">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="UrlSlug" ColumnName="UrlSlug" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="MenuItemIngredients" TypeName="HoldTheAllergenModel.MenuItemIngredients" StoreEntitySet="MenuItemIngredients">
+            <EndProperty Name="RestaurantIngredients">
+              <ScalarProperty Name="Id" ColumnName="RestaurantIngredientId" />
+            </EndProperty>
+            <EndProperty Name="MenuItems">
+              <ScalarProperty Name="Id" ColumnName="MenuItemId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RestaurantIngredientAllergens" TypeName="HoldTheAllergenModel.RestaurantIngredientAllergens" StoreEntitySet="RestaurantIngredientAllergens">
+            <EndProperty Name="Allergens">
+              <ScalarProperty Name="Id" ColumnName="AllergenId" />
+            </EndProperty>
+            <EndProperty Name="RestaurantIngredients">
+              <ScalarProperty Name="Id" ColumnName="RestaurantIngredientId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="UserStarredMenuItems">
+            <EntityTypeMapping TypeName="HoldTheAllergenModel.UserStarredMenuItem">
+              <MappingFragment StoreEntitySet="UserStarredMenuItems">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+                <ScalarProperty Name="MenuItemId" ColumnName="MenuItemId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HoldTheAllergenModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="LastActivity" ColumnName="LastActivity" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserAllergies" TypeName="HoldTheAllergenModel.UserAllergies" StoreEntitySet="UserAllergies">
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Allergen">
+              <ScalarProperty Name="Id" ColumnName="AllergenId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams />
+  </Designer>
+</edmx:Edmx>

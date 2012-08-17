@@ -1,0 +1,35 @@
+﻿@model HoldTheAllergen.Models.MenuItemCreateModel
+<form class="form-horizontal" action="@Request.RawUrl" method="POST">
+    @Html.ValidationSummary(true)
+    <div class="control-group">
+        @Html.BootstrapLabelFor(model => model.Name)
+        <div class="controls">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.BootstrapLabelFor(model => model.GroupName)
+        <div class="controls">
+            @Html.EditorFor(model => model.GroupName)
+            @Html.ValidationMessageFor(model => model.GroupName)
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.BootstrapLabelFor(model => model.IngredientIds)
+        <div class="controls">
+            @Html.ListBoxFor(model => model.IngredientIds, Model.IngredientList)
+            @Html.ValidationMessageFor(model => model.IngredientIds)
+        </div>
+    </div>
+    @Html.EditorFor(model => model.RestaurantId)
+</form>
+<script type="text/javascript" src="/scripts/jquery.fcbkcomplete.min.js"></script>
+<script>
+    $("#IngredientIds").fcbkcomplete({
+        json_url: '/restaurantingredient/search?restaurantId=@Model.RestaurantId',
+        cache: true,filter_case: false,filter_hide: true,filter_selected: true,
+        addontab: true,bricket: false,maxitems: 20,input_min_size: 1,height: 400,
+        width: 340,newel: true,Sselect_all_text: "select all"
+    });
+</script>

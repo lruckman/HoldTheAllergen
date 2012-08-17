@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoldTheAllergen.API", "HoldTheAllergen.API\HoldTheAllergen.API.csproj", "{EB8736AB-B20D-4958-9C5A-3BCA9B10EE6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoldTheAllergen.Data", "HoldTheAllergen.Data\HoldTheAllergen.Data.csproj", "{36FC401B-2F04-4892-85F9-93D5C0F5A6A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoldTheAllergen.Models", "HoldTheAllergen.Models\HoldTheAllergen.Models.csproj", "{4EB8BE22-2686-41ED-BBD4-64D90A1EB00F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoldTheAllergen.Backend", "HoldTheAllergen.Backend\HoldTheAllergen.Backend.csproj", "{86E1E665-025D-4E04-9230-34808A185826}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Crawlers", "Crawlers", "{399D0D13-5B1B-4CDE-944D-FCFC3CB830DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoldTheAllergen.Crawler.BaskinRobbins", "HoldTheAllergen.Crawler.BaskinRobbins\HoldTheAllergen.Crawler.BaskinRobbins.csproj", "{104F4010-9D32-4415-8793-ECBA34FD93B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB8736AB-B20D-4958-9C5A-3BCA9B10EE6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB8736AB-B20D-4958-9C5A-3BCA9B10EE6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB8736AB-B20D-4958-9C5A-3BCA9B10EE6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB8736AB-B20D-4958-9C5A-3BCA9B10EE6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36FC401B-2F04-4892-85F9-93D5C0F5A6A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36FC401B-2F04-4892-85F9-93D5C0F5A6A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36FC401B-2F04-4892-85F9-93D5C0F5A6A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36FC401B-2F04-4892-85F9-93D5C0F5A6A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EB8BE22-2686-41ED-BBD4-64D90A1EB00F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EB8BE22-2686-41ED-BBD4-64D90A1EB00F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EB8BE22-2686-41ED-BBD4-64D90A1EB00F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EB8BE22-2686-41ED-BBD4-64D90A1EB00F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86E1E665-025D-4E04-9230-34808A185826}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86E1E665-025D-4E04-9230-34808A185826}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86E1E665-025D-4E04-9230-34808A185826}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86E1E665-025D-4E04-9230-34808A185826}.Release|Any CPU.Build.0 = Release|Any CPU
+		{104F4010-9D32-4415-8793-ECBA34FD93B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{104F4010-9D32-4415-8793-ECBA34FD93B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{104F4010-9D32-4415-8793-ECBA34FD93B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{104F4010-9D32-4415-8793-ECBA34FD93B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{104F4010-9D32-4415-8793-ECBA34FD93B0} = {399D0D13-5B1B-4CDE-944D-FCFC3CB830DE}
+	EndGlobalSection
+EndGlobal

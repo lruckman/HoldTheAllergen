@@ -1,0 +1,25 @@
+﻿@model HoldTheAllergen.Models.RestaurantIngredientEditModel
+<form class="form-horizontal" action="@Request.RawUrl" method="POST">
+    @Html.ValidationSummary(true)
+    <div class="control-group">
+        @Html.BootstrapLabelFor(model => model.Name)
+        <div class="controls">
+            @Html.TextBoxFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.BootstrapLabelFor(model => model.Description)
+        <div class="controls">
+            @Html.TextAreaFor(model => model.Description,new{style="height:120px;width:295px;"})
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.BootstrapLabelFor(model => model.AllergenIds)
+        <div class="controls checkbox-list">
+            @Html.CheckBoxListFor(model=>model.AllergenIds,Model.AllergenList)
+            @Html.ValidationMessageFor(model => model.AllergenIds)
+        </div>
+    </div>
+</form>

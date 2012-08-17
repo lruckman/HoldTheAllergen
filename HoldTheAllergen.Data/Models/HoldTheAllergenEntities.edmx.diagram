@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a051b3e8181e40dab5b0cf68f4ac9be1" Name="Diagram1">
+        <EntityTypeShape EntityType="HoldTheAllergenModel.Allergen" Width="1.5" PointX="6" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HoldTheAllergenModel.MenuItem" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HoldTheAllergenModel.RestaurantCategory" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="HoldTheAllergenModel.RestaurantIngredient" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HoldTheAllergenModel.RestaurantLocation" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HoldTheAllergenModel.Restaurant" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="HoldTheAllergenModel.FK_MenuItems_Restaurant" ManuallyRouted="false" />
+        <AssociationConnector Association="HoldTheAllergenModel.FK_Restaurants_RestaurantCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="HoldTheAllergenModel.FK_RestaurantIngredients_Restaurant" ManuallyRouted="false" />
+        <AssociationConnector Association="HoldTheAllergenModel.FK_RestaurantLocations_Restaurants" ManuallyRouted="false" />
+        <AssociationConnector Association="HoldTheAllergenModel.MenuItemIngredients" ManuallyRouted="false" />
+        <AssociationConnector Association="HoldTheAllergenModel.RestaurantIngredientAllergens" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HoldTheAllergenModel.UserStarredMenuItem" Width="1.5" PointX="4.07085055488667" PointY="14.47346465963566" />
+        <EntityTypeShape EntityType="HoldTheAllergenModel.User" Width="1.5" PointX="1.875" PointY="12.5" />
+        <AssociationConnector Association="HoldTheAllergenModel.FK_UserStarredMenuItems_Users" />
+        <AssociationConnector Association="HoldTheAllergenModel.UserAllergies" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

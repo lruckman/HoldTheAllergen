@@ -1,0 +1,48 @@
+﻿@model IEnumerable<HoldTheAllergen.Models.MenuItemModel>
+
+@section Menu
+{
+    @Html.Partial("_RestaurantMenu", new HoldTheAllergen.Backend.Models.RestaurantMenuModel {RestaurantId = int.Parse(Request.QueryString["restaurantid"]),RestarurantName= ViewBag.Title})
+}
+@section Js
+{
+    <script>var modalSaved = function () { $('#restaurant-menuitem-table').load('@Request.RawUrl #restaurant-menuitem-table'); }</script>
+}
+<h2 style="float: left">@ViewBag.Title</h2>
+<p style="text-align: right">
+    <a href="@Url.Action("Create", new { restaurantId = Context.Request["restaurantid"] })" class="btn btn-primary omg-modal">
+        Create New Menu Item</a>
+</p>
+<table class="table table-striped" id="restaurant-menuitem-table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Ingredients)</th>
+            <th>@Html.DisplayNameFor(model => model.Allergens)</th>
+            <th style="width:75px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>@string.Join(", ", item.Ingredients)</td>
+                <td>@string.Join(", ", item.Allergens)</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="@Url.Action("Edit", new { id = item.Id })" class="btn omg-modal" title="Update"><i class="icon-pencil">
+                        </i></a><a href="@Url.Action("Delete", new { id = item.Id })" class="btn omg-modal" title="Delete"><i
+                            class="icon-trash"></i></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p style="text-align: right">
+    <a href="@Url.Action("Create", new { restaurantId = Context.Request["restaurantid"] })" class="btn btn-primary omg-modal">
+        Create New Menu Item</a>
+</p>

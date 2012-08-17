@@ -1,0 +1,17 @@
+﻿@model HoldTheAllergen.Backend.Models.RestaurantMenuModel
+@helper MarkActive(string controller)
+{
+    if (ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToString().ToLowerInvariant() == controller)
+    {
+        <text>active</text>
+    }
+}
+<div class="well sidebar-nav">
+    <ul class="nav nav-list">
+        <li class="nav-header">@Model.RestarurantName</li>
+        <li class="@MarkActive("restaurantingredient")">@Html.ActionLink("Ingredients", "Index", "RestaurantIngredient", new {restaurantId = Model.RestaurantId}, null)</li>
+        <li class="@MarkActive("menuitem")">@Html.ActionLink("Menu Items", "Index", "MenuItem", new {restaurantId = Model.RestaurantId}, null)
+            <li class="divider"></li>
+        <li class="@MarkActive("restaurant")">@Html.ActionLink("All Restaurants", "Index", "Restaurant")</li>
+    </ul>
+</div>

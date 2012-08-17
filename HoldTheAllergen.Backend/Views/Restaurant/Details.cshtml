@@ -1,0 +1,12 @@
+﻿@model HoldTheAllergen.Models.RestaurantModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@section Menu
+{
+    @Html.Partial("_RestaurantMenu", new HoldTheAllergen.Backend.Models.RestaurantMenuModel {RestaurantId = Model.Id,RestarurantName= ViewBag.Title})
+}
+
+@Html.DisplayForModel()

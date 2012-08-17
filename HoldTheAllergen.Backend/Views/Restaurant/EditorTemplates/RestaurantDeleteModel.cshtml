@@ -1,0 +1,5 @@
+﻿@model HoldTheAllergen.Models.RestaurantDeleteModel
+<form class="form-horizontal" action="@Request.RawUrl" method="POST">
+<p>Deleting this restaurant cannot be undone, are you sure?</p>
+@Html.EditorFor(model=>model.Id)
+</form>

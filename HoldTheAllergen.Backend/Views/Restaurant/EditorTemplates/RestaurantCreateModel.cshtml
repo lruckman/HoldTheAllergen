@@ -1,0 +1,11 @@
+﻿@model HoldTheAllergen.Models.RestaurantCreateModel
+<form class="form-horizontal" action="@Request.RawUrl" method="POST">
+@Html.ValidationSummary(true)
+    <div class="control-group">
+        @Html.BootstrapLabelFor(model => model.Name)
+        <div class="controls">
+            @Html.TextBoxFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+    </div>
+</form>

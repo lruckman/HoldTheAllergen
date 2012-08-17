@@ -1,0 +1,20 @@
+﻿@model HoldTheAllergen.Models.RestaurantModel
+
+<h2>Restaurant Information</h2>
+
+<fieldset>
+    <legend>@Model.Name</legend>
+    
+    <div class="span2">
+        @if (!string.IsNullOrWhiteSpace(Model.Logo))
+        {
+            @*<a href="#" class="thumbnail">
+                <img src="@Url.Content(Model.Logo)" alt="">
+            </a>*@
+        }
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
