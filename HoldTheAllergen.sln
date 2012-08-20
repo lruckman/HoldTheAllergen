@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Crawlers", "Crawlers", "{39
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoldTheAllergen.Crawler.BaskinRobbins", "HoldTheAllergen.Crawler.BaskinRobbins\HoldTheAllergen.Crawler.BaskinRobbins.csproj", "{104F4010-9D32-4415-8793-ECBA34FD93B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoldTheAllergen.Crawler.MarieCallenders", "HoldTheAllergen.Crawler.MarieCallenders\HoldTheAllergen.Crawler.MarieCallenders.csproj", "{D404BF18-410F-4F6C-98C5-E8BEE78D2CFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,11 +41,16 @@ Global
 		{104F4010-9D32-4415-8793-ECBA34FD93B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{104F4010-9D32-4415-8793-ECBA34FD93B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{104F4010-9D32-4415-8793-ECBA34FD93B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D404BF18-410F-4F6C-98C5-E8BEE78D2CFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D404BF18-410F-4F6C-98C5-E8BEE78D2CFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D404BF18-410F-4F6C-98C5-E8BEE78D2CFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D404BF18-410F-4F6C-98C5-E8BEE78D2CFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{104F4010-9D32-4415-8793-ECBA34FD93B0} = {399D0D13-5B1B-4CDE-944D-FCFC3CB830DE}
+		{D404BF18-410F-4F6C-98C5-E8BEE78D2CFE} = {399D0D13-5B1B-4CDE-944D-FCFC3CB830DE}
 	EndGlobalSection
 EndGlobal
