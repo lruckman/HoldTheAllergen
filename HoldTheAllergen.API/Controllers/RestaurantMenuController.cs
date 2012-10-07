@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http.ModelBinding;
+﻿using System;
+using System.Collections.Generic;
 using HoldTheAllergen.API.Core;
 using HoldTheAllergen.Data.DataAccess;
-using HoldTheAllergen.Data.Models;
 using HoldTheAllergen.Models.API;
 
 namespace HoldTheAllergen.API.Controllers
@@ -12,21 +9,22 @@ namespace HoldTheAllergen.API.Controllers
     public class RestaurantMenuController : DefaultController
     {
         private readonly IRestaurantRepository _restaurantRepository;
+        private readonly IUserRepository _userRepository;
 
-        public RestaurantMenuController(IRestaurantRepository restaurantRepository)
+        public RestaurantMenuController(IRestaurantRepository restaurantRepository, IUserRepository userRepository)
         {
             _restaurantRepository = restaurantRepository;
+            _userRepository = userRepository;
         }
 
-        public HttpResponseMessage<IEnumerable<RestaurantMenuModel>> Get(int restaurantId,
-                                                                         [ModelBinder(typeof (CustomModelBinderProvider)
-                                                                             )] User user)
+        public IList<RestaurantMenuModel> Get(int restaurantId, Guid userId)
         {
+            var user = _userRepository.GetUser(userId);
             var menuItems = _restaurantRepository.GetMenuItems(restaurantId);
 
-            var model = RestaurantMenuModelMapper.Map(menuItems, user, false);
+            var model = RestaurantMenuModelMapper.Map(menuItems, user, false, false);
 
-            return new HttpResponseMessage<IEnumerable<RestaurantMenuModel>>(model, HttpStatusCode.OK);
+            return model;
         }
     }
 }

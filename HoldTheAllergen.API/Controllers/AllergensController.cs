@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using HoldTheAllergen.API.Core;
 using HoldTheAllergen.Data.DataAccess;
-using HoldTheAllergen.Data.Models;
 using HoldTheAllergen.Models.API;
 
 namespace HoldTheAllergen.API.Controllers
@@ -12,15 +11,18 @@ namespace HoldTheAllergen.API.Controllers
     public class AllergensController : ApiController
     {
         private readonly IAllergenRepository _allergenRepository;
+        private readonly IUserRepository _userRepository;
 
-        public AllergensController(IAllergenRepository allergenRepository)
+        public AllergensController(IAllergenRepository allergenRepository, IUserRepository userRepository)
         {
             _allergenRepository = allergenRepository;
+            _userRepository = userRepository;
         }
 
         // GET /api/allergens/5
-        public IEnumerable<AllergenItemModel> Get([ModelBinder(typeof (CustomModelBinderProvider))] User user)
+        public IList<AllergenItemModel> Get(Guid userId)
         {
+            var user = _userRepository.GetUser(userId);
             var allergens = _allergenRepository.GetAllergens();
             var allergies = user.Allergies.ToArray();
             var model = allergens.Select(allergen =>

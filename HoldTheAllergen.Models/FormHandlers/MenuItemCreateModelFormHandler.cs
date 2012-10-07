@@ -17,7 +17,7 @@ namespace HoldTheAllergen.Models.FormHandlers
 
         public void Handle(MenuItemCreateModel form)
         {
-            var restaurant = _restaurantRepository.GetById(form.RestaurantId);
+            var restaurant = _restaurantRepository.Find(form.RestaurantId);
 
             var menuItem = new MenuItem
                                {

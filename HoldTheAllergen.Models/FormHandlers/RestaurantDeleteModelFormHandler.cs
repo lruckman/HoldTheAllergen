@@ -14,14 +14,14 @@ namespace HoldTheAllergen.Models.FormHandlers
 
         public void Handle(RestaurantDeleteModel form)
         {
-            var restaurant = _restaurantRepository.GetById(form.Id);
+            var restaurant = _restaurantRepository.Find(form.Id);
 
             if (restaurant == null)
             {
                 return;
             }
 
-            _restaurantRepository.DeleteOnSubmit(restaurant).SaveChanges();
+            _restaurantRepository.Delete(restaurant);
         }
     }
 }

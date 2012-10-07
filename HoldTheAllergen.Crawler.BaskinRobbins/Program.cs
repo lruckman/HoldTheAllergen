@@ -27,9 +27,7 @@ namespace HoldTheAllergen.Crawler.BaskinRobbins
 
         public const int RestaurantId = 4883;
 
-        private static readonly HoldTheAllergenEntities Db =
-            new HoldTheAllergenEntities(
-                ConfigurationManager.ConnectionStrings["HoldTheAllergenEntities"].ConnectionString);
+        private static readonly HoldTheAllergenEntities Db = new HoldTheAllergenEntities();
 
         private static readonly RestaurantIngredientCreateModelHandler CreateModelHandler =
             new RestaurantIngredientCreateModelHandler(new RestaurantRepository(Db), new AllergenRepository(Db));

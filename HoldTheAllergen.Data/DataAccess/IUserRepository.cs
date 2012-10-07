@@ -5,6 +5,6 @@ namespace HoldTheAllergen.Data.DataAccess
 {
     public interface IUserRepository : IRepository<User>
     {
-        User GetUser(Guid userId);
+        User GetUser(Guid id);
     }
 }

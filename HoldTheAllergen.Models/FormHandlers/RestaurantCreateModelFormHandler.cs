@@ -15,16 +15,18 @@ namespace HoldTheAllergen.Models.FormHandlers
 
         public void Handle(RestaurantCreateModel form)
         {
-            var restaurant = _restaurantRepository.CreateNew();
-            restaurant.DateAdded = DateTime.UtcNow;
-            restaurant.Name = form.Name.Trim();
-            restaurant.CategoryName = "Fast Food";
-            restaurant.Logo = string.Format("~/images/logos/{0}.jpg", form.Name.ToLowerInvariant().Replace(" ",""));
-            restaurant.UrlSlug = "";
+            var restaurant = new Restaurant
+                {
+                    DateAdded = DateTime.UtcNow,
+                    Name = form.Name.Trim(),
+                    CategoryName = "Fast Food",
+                    Logo = string.Format("~/images/logos/{0}.jpg", form.Name.ToLowerInvariant().Replace(" ", "")),
+                    UrlSlug = ""
+                };
 
             // save logo
 
-            _restaurantRepository.InsertOnSubmit(restaurant);
+            _restaurantRepository.Create(restaurant);
             _restaurantRepository.SaveChanges();
         }
     }

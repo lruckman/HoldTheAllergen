@@ -29,10 +29,10 @@ namespace HoldTheAllergen.Models.FormHandlers
 
             foreach (var orphan in orphans)
             {
-                _restaurantRepository.DeleteOnSubmit(orphan);
+                _restaurantRepository.Delete(orphan);
             }
 
-            _restaurantRepository.DeleteOnSubmit(restaurantIngredient).SaveChanges();
+            _restaurantRepository.Delete(restaurantIngredient);
         }
     }
 }

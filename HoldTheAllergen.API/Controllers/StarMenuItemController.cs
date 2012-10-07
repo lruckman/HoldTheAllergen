@@ -2,8 +2,6 @@
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
-using HoldTheAllergen.API.Core;
 using HoldTheAllergen.Data.DataAccess;
 using HoldTheAllergen.Data.Models;
 
@@ -12,53 +10,55 @@ namespace HoldTheAllergen.API.Controllers
     public class StarMenuItemController : ApiController
     {
         private readonly IRestaurantRepository _restaurantRepository;
+        private readonly IUserRepository _userRepository;
 
-        public StarMenuItemController(IRestaurantRepository restaurantRepository)
+        public StarMenuItemController(IRestaurantRepository restaurantRepository, IUserRepository userRepository)
         {
             _restaurantRepository = restaurantRepository;
+            _userRepository = userRepository;
         }
 
         // POST /api/starredrestaurantmenu
-        public HttpResponseMessage Post(int id, [ModelBinder(typeof(CustomModelBinderProvider))]User user)
+        public HttpResponseMessage Post(int id, Guid userId)
         {
+            var user = _userRepository.GetUser(userId);
             var menuItem = _restaurantRepository.GetMenuItemById(id);
 
             if (menuItem == null)
             {
-                return new HttpResponseMessage(HttpStatusCode.NotFound);
+                return ControllerContext.Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             if (_restaurantRepository.GetStarredMenuItem(id, user.Id) != null)
             {
-                return new HttpResponseMessage(HttpStatusCode.OK);
+                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
             }
 
-            _restaurantRepository.InsertOnSubmit(new UserStarredMenuItem
-                                                     {
-                                                         CreateDate = DateTime.UtcNow,
-                                                         MenuItemId = menuItem.Id,
-                                                         RestaurantId = menuItem.RestaurantId,
-                                                         UserId = user.Id
-                                                     });
-            _restaurantRepository.SaveChanges();
+            _restaurantRepository.Create(new UserStarredMenuItem
+                {
+                    CreateDate = DateTime.UtcNow,
+                    MenuItemId = menuItem.Id,
+                    RestaurantId = menuItem.RestaurantId,
+                    UserId = user.Id
+                });
 
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
         }
 
         // DELETE /api/starredrestaurantmenu/5
-        public HttpResponseMessage Delete(int id, [ModelBinder(typeof(CustomModelBinderProvider))]User user)
+        public HttpResponseMessage Delete(int id, Guid userId)
         {
-            var starredMenuItem = _restaurantRepository.GetStarredMenuItem(id, user.Id);
+            var user = _userRepository.GetUser(userId);
+            var starredMenuItem = _restaurantRepository.GetStarredMenuItem(id, userId);
 
             if (starredMenuItem == null)
             {
-                return new HttpResponseMessage(HttpStatusCode.NotFound);
+                return ControllerContext.Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            _restaurantRepository.DeleteOnSubmit(starredMenuItem);
-            _restaurantRepository.SaveChanges();
+            _restaurantRepository.Delete(starredMenuItem);
 
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }

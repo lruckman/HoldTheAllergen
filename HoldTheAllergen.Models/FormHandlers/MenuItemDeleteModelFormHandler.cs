@@ -20,7 +20,7 @@ namespace HoldTheAllergen.Models.FormHandlers
             {
                 return;
             }
-            _restaurantRepository.DeleteOnSubmit(menuItem).SaveChanges();
+            _restaurantRepository.Delete(menuItem);
         }
     }
 }

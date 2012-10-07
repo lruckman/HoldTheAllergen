@@ -54,8 +54,7 @@ namespace HoldTheAllergen.Models.FormHandlers
                 });
             }
             
-            _restaurantRepository.InsertOnSubmit(restaurantIngredient);
-            _restaurantRepository.SaveChanges();
+            _restaurantRepository.Create(restaurantIngredient);
         }
     }
 }

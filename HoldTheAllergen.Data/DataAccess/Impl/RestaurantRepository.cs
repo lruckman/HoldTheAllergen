@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using HoldTheAllergen.Data.Models;
 
@@ -7,106 +8,105 @@ namespace HoldTheAllergen.Data.DataAccess.Impl
 {
     public class RestaurantRepository : Repository<Restaurant>, IRestaurantRepository
     {
-        private readonly HoldTheAllergenEntities _context;
-
-        public RestaurantRepository(HoldTheAllergenEntities context)
+        public RestaurantRepository(DbContext context)
             : base(context)
         {
-            _context = context;
         }
 
         #region IRestaurantRepository Members
 
-        public override Restaurant GetById(int id)
+        public Restaurant GetById(int id)
         {
-            return _context.Restaurants
-                .Include("Ingredients")
+            return Context.Set<Restaurant>()
+                .Include(x => x.Ingredients)
                 .Include("Ingredients.Allergens")
-                .Include("MenuItems")
+                .Include(x => x.MenuItems)
                 .FirstOrDefault(restaurant => restaurant.Id == id);
         }
 
         public RestaurantIngredient GetIngredientById(int id)
         {
-            return _context.RestaurantIngredients.FirstOrDefault(ingredient => ingredient.Id == id);
-        }
-
-        public IEnumerable<RestaurantCategory> GetCategories()
-        {
-            return _context.RestaurantCategories.OrderBy(category => category.Name).ToArray();
+            return Context.Set<RestaurantIngredient>()
+                .FirstOrDefault(ingredient => ingredient.Id == id);
         }
 
         public MenuItem GetMenuItemById(int id)
         {
-            return _context.MenuItems.FirstOrDefault(menuItem => menuItem.Id == id);
+            return Context.Set<MenuItem>()
+                .FirstOrDefault(menuItem => menuItem.Id == id);
         }
 
         public MenuItem GetFullMenuItemDetailsById(int id)
         {
             return
-                _context.MenuItems.Include("Restaurant").Include("Ingredients").Include("Ingredients.Allergens").
-                    FirstOrDefault(menuItem => menuItem.Id == id);
+                Context.Set<MenuItem>()
+                    .Include(x => x.Restaurant)
+                    .Include(x => x.Ingredients)
+                    .Include("Ingredients.Allergens")
+                    .FirstOrDefault(menuItem => menuItem.Id == id);
         }
 
         public IEnumerable<RestaurantIngredient> GetIngredientsByRestaurantId(int restaurantId)
         {
-            return _context.RestaurantIngredients
+            return Context.Set<RestaurantIngredient>()
                 .Where(ingredient => ingredient.RestaurantId == restaurantId)
                 .OrderBy(ingredient => ingredient.Name)
                 .ToArray();
         }
 
-        public IRepository<Restaurant> InsertOnSubmit(RestaurantIngredient entity)
+        public int Create(RestaurantIngredient entity)
         {
-            _context.RestaurantIngredients.AddObject(entity);
-            return this;
+            Context.Set<RestaurantIngredient>().Add(entity);
+            return Context.SaveChanges();
         }
 
-        public IRepository<Restaurant> DeleteOnSubmit(MenuItem entity)
+        public int Delete(MenuItem entity)
         {
-            _context.MenuItems.DeleteObject(entity);
-            return this;
-        }
-
-        public RestaurantLocation GetLocationById(int id)
-        {
-            return _context.RestaurantLocations.Include("Restaurant").FirstOrDefault(location => location.Id == id);
+            Context.Set<MenuItem>().Remove(entity);
+            return Context.SaveChanges();
         }
 
         public UserStarredMenuItem GetStarredMenuItem(int menuItemId, Guid userId)
         {
-            return _context.UserStarredMenuItems.FirstOrDefault(fav => fav.UserId == userId && fav.MenuItemId == menuItemId);
+            return Context.Set<UserStarredMenuItem>()
+                .FirstOrDefault(fav => fav.UserId == userId && fav.MenuItemId == menuItemId);
         }
 
-        public IRepository<Restaurant> InsertOnSubmit(UserStarredMenuItem entity)
+        public int Create(UserStarredMenuItem entity)
         {
-            _context.UserStarredMenuItems.AddObject(entity);
-            return this;
+            Context.Set<UserStarredMenuItem>().Add(entity);
+            return Context.SaveChanges();
         }
 
-        public IRepository<Restaurant> DeleteOnSubmit(UserStarredMenuItem entity)
+        public int Delete(UserStarredMenuItem entity)
         {
-            _context.UserStarredMenuItems.DeleteObject(entity);
-            return this;
+            Context.Set<UserStarredMenuItem>().Remove(entity);
+            return Context.SaveChanges();
         }
 
-        public IRepository<Restaurant> DeleteOnSubmit(RestaurantIngredient entity)
+        public int Delete(RestaurantIngredient entity)
         {
-            _context.RestaurantIngredients.DeleteObject(entity);
-            return this;
+            Context.Set<RestaurantIngredient>().Remove(entity);
+            return Context.SaveChanges();
         }
 
         public IEnumerable<MenuItem> GetMenuItems(int restaurantId)
         {
             return
-                _context.MenuItems.Include( "Ingredients").Where(menuItem => menuItem.RestaurantId == restaurantId).OrderBy(
-                    menuItem => menuItem.GroupName).ThenBy(menuItem => menuItem.Name).ToArray();
+                Context.Set<MenuItem>()
+                    .Include(x => x.Ingredients)
+                    .Where(menuItem => menuItem.RestaurantId == restaurantId)
+                    .OrderBy(menuItem => menuItem.GroupName)
+                    .ThenBy(menuItem => menuItem.Name)
+                    .ToArray();
         }
 
 
         public IEnumerable<UserStarredMenuItem> GetStarredMenuItems(int restaurantId, Guid userId)
         {
-            return _context.UserStarredMenuItems.Where(fav => fav.UserId == userId && fav.RestaurantId == restaurantId);
+            return Context.Set<UserStarredMenuItem>()
+                .Where(fav => fav.UserId == userId && fav.RestaurantId == restaurantId)
+                .ToArray();
         }
 
         #endregion

@@ -1,111 +1,116 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Metadata.Edm;
-using System.Data.Objects;
-using System.Data.Objects.DataClasses;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 
 namespace HoldTheAllergen.Data.DataAccess.Impl
 {
-    public class Repository<T> : IRepository<T>, IRepository where T : EntityObject
+    public class Repository<TObject> : IRepository<TObject>
+        where TObject : class
     {
-        private readonly ObjectContext _context;
+        protected DbContext Context = null;
 
-        public Repository(ObjectContext context)
+        public Repository(DbContext context)
         {
-            _context = context;
+            Context = context;
         }
 
-        #region IRepository Members
-
-        object IRepository.All()
+        protected DbSet<TObject> DbSet
         {
-            return All();
+            get { return Context.Set<TObject>(); }
         }
 
-        IRepository IRepository.InsertOnSubmit(object entity)
+        #region IRepository<TObject> Members
+
+        public virtual IQueryable<TObject> All()
         {
-            InsertOnSubmit((T) entity);
-            return this;
+            return DbSet.AsQueryable();
         }
 
-        IRepository IRepository.DeleteOnSubmit(object entity)
+        public virtual IQueryable<TObject>
+            Filter(Expression<Func<TObject, bool>> predicate)
         {
-            DeleteOnSubmit((T) entity);
-            return this;
+            return DbSet.Where(predicate).AsQueryable();
         }
 
-        object IRepository.CreateNew()
+        public bool Contains(Expression<Func<TObject, bool>> predicate)
         {
-            return CreateNew();
+            return DbSet.Count(predicate) > 0;
         }
 
-        object IRepository.GetById(int id)
+        public virtual TObject Find(params object[] keys)
         {
-            return GetById(id);
+            return DbSet.Find(keys);
+        }
+
+        public virtual TObject Find(Expression<Func<TObject, bool>> predicate)
+        {
+            return DbSet.FirstOrDefault(predicate);
+        }
+
+        public virtual TObject Create(TObject TObject)
+        {
+            var newEntry = DbSet.Add(TObject);
+            Context.SaveChanges();
+            return newEntry;
+        }
+
+        public virtual int Count
+        {
+            get { return DbSet.Count(); }
+        }
+
+        public void SaveChanges()
+        {
+            Context.SaveChanges();
+        }
+
+        public virtual int Update(TObject TObject)
+        {
+            var entry = Context.Entry(TObject);
+
+            DbSet.Attach(TObject);
+            entry.State = EntityState.Modified;
+
+            return Context.SaveChanges();
+        }
+
+        public virtual int Delete(Expression<Func<TObject, bool>> predicate)
+        {
+            var objects = Filter(predicate);
+
+            foreach (var obj in objects)
+            {
+                DbSet.Remove(obj);
+            }
+
+            Context.SaveChanges();
+
+            return 0;
+        }
+
+        public virtual int Delete(TObject TObject)
+        {
+            DbSet.Remove(TObject);
+            return Context.SaveChanges();
+        }
+
+
+        public virtual IQueryable<TObject> Filter(Expression<Func<TObject, bool>> filter, out int total, int index = 0,
+                                                  int size = 50)
+        {
+            var skipCount = index*size;
+            var resetSet = filter != null
+                               ? DbSet.Where(filter).AsQueryable()
+                               : DbSet.AsQueryable();
+            resetSet = skipCount == 0
+                           ? resetSet.Take(size)
+                           : resetSet.Skip(skipCount).Take(size);
+            total = resetSet.Count();
+            return resetSet.AsQueryable();
         }
 
         #endregion
-
-        #region IRepository<T> Members
-
-        public virtual IQueryable<T> All()
-        {
-            return _context.CreateQuery<T>(GetEntitySetName());
-        }
-
-        public virtual T CreateNew()
-        {
-            return Activator.CreateInstance<T>();
-        }
-
-        public virtual T GetById(int id)
-        {
-            string entitySetKeyName = string.Format("{0}.{1}", _context.DefaultContainerName, GetEntitySetName());
-            var key = new EntityKey(entitySetKeyName, "Id", id);
-
-            return (T) _context.GetObjectByKey(key);
-        }
-
-        public virtual void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
-
-        public virtual IQueryable<T> Query(Expression<Func<T, bool>> where)
-        {
-            return _context.CreateQuery<T>(GetEntitySetName()).Where(where);
-        }
-
-        public virtual IRepository InsertOnSubmit(T entity)
-        {
-            _context.AddObject(GetEntitySetName(), entity);
-            return this;
-        }
-
-        public virtual IRepository DeleteOnSubmit(T entity)
-        {
-            _context.DeleteObject(entity);
-            return this;
-        }
-
-        public virtual IRepository DeleteAllOnSubmit(IEnumerable<T> entities)
-        {
-            foreach (T entity in entities) DeleteOnSubmit(entity);
-            return this;
-        }
-
-        #endregion
-
-        private string GetEntitySetName()
-        {
-            string entitySetName = _context.MetadataWorkspace.GetEntityContainer(
-                _context.DefaultContainerName, DataSpace.CSpace)
-                .BaseEntitySets.FirstOrDefault(x => x.ElementType.Name == typeof (T).Name).Name;
-
-            return entitySetName;
-        }
     }
 }

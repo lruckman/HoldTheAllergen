@@ -7,5 +7,6 @@
         public string Logo { get; set; }
         public string MenuAction { get; set; }
         public string StarredMenuAction { get; set; }
+        public string AllergyFreeMenuAction { get; set; }
     }
 }
