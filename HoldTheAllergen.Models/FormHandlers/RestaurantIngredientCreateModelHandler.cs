@@ -20,7 +20,7 @@ namespace HoldTheAllergen.Models.FormHandlers
 
         public void Handle(RestaurantIngredientCreateModel form)
         {
-            var ingredientDescription = form.Description
+            var ingredientDescription = (form.Description ?? "")
                     .Replace(Environment.NewLine, " ")
                     .Replace("  ", " ")
                     .Replace("  ", " ")

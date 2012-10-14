@@ -85,7 +85,7 @@ namespace HoldTheAllergen.Backend.Controllers
 
         public ActionResult Index(int restaurantId)
         {
-            var restaurant = _restaurantRepository.GetById(restaurantId);
+            var restaurant = _restaurantRepository.Find(restaurantId);
             var model =
                 MappingEngine.Map<IEnumerable<MenuItem>, IEnumerable<MenuItemModel>>(
                     restaurant.MenuItems.OrderBy(menuItem => menuItem.Name));

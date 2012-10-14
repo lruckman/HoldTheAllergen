@@ -23,7 +23,7 @@ namespace HoldTheAllergen.Backend.Controllers
 
         public ActionResult Index(int restaurantId)
         {
-            var restaurant = _restaurantRepository.GetById(restaurantId);
+            var restaurant = _restaurantRepository.Find(restaurantId);
             var model = MappingEngine.Map<IEnumerable<RestaurantIngredient>, IEnumerable<RestaurantIngredientModel>>(
                     restaurant.Ingredients.OrderBy(ingredient=>ingredient.Name).ToArray());
             ViewBag.Title = restaurant.Name + " Ingredients";

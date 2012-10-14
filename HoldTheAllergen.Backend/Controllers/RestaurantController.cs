@@ -24,7 +24,7 @@ namespace HoldTheAllergen.Backend.Controllers
         [PostRedirectGet.ImportModelState]
         public ActionResult Create()
         {
-            var model = MappingEngine.Map<Restaurant, RestaurantCreateModel>(_restaurantRepository.CreateNew());
+            var model = MappingEngine.Map<Restaurant, RestaurantCreateModel>(new Restaurant());
             return PartialView("_create",model);
         }
 
@@ -39,7 +39,7 @@ namespace HoldTheAllergen.Backend.Controllers
         [PostRedirectGet.ImportModelState]
         public ActionResult Delete(int id)
         {
-            var restaurant = _restaurantRepository.GetById(id);
+            var restaurant = _restaurantRepository.Find(id);
 
             if (restaurant == null)
             {
@@ -61,7 +61,7 @@ namespace HoldTheAllergen.Backend.Controllers
 
         public ActionResult Details(int id)
         {
-            var restaurant = _restaurantRepository.GetById(id);
+            var restaurant = _restaurantRepository.Find(id);
 
             if (restaurant == null)
             {

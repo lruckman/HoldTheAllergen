@@ -16,7 +16,7 @@ namespace HoldTheAllergen.Backend.Core.Providers
 
         public MultiSelectList Provide(int restaurantId, IEnumerable selected)
         {
-            var ingredients = _restaurantRepository.GetById(restaurantId).Ingredients.ToArray();
+            var ingredients = _restaurantRepository.Find(restaurantId).Ingredients.ToArray();
             var menuItem = ingredients
                 .Select(ingredient => new {ingredient.Id, Name = ingredient.Name})
                 .OrderBy(ingredient => ingredient.Name);

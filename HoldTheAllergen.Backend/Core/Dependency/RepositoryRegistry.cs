@@ -1,4 +1,4 @@
-﻿using System.Configuration;
+﻿using System.Data.Entity;
 using HoldTheAllergen.Data.DataAccess;
 using HoldTheAllergen.Data.DataAccess.Impl;
 using HoldTheAllergen.Data.Models;
@@ -12,12 +12,9 @@ namespace HoldTheAllergen.Backend.Core.Dependency
         {
             For(typeof (IRepository<>)).HttpContextScoped().Use(typeof (Repository<>));
 
-            For<HoldTheAllergenEntities>()
+            For<DbContext>()
                 .HttpContextScoped()
-                .Use(
-                    () =>
-                    new HoldTheAllergenEntities(
-                        ConfigurationManager.ConnectionStrings["HoldTheAllergenEntities"].ConnectionString));
+                .Use(() => new HoldTheAllergenEntities());
         }
     }
 }
